@@ -10,3 +10,4 @@ Third line of file iacta
 Created a file
 Duplicate  last line of a file
 Delete all .js files in folder and subfolders
+Unique set

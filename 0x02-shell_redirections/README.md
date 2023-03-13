@@ -1,2 +1,1 @@
-1.Print confused smiley
-Echo helloworld
+Starting shell i/o perms

@@ -13,3 +13,4 @@ Delete all .js files in folder and subfolders
 Unique set
 Find root word in /etc/passwd
 Count "bin" word in etc/passwd
+Displays line containing root and 3 lines after that

@@ -19,3 +19,4 @@ Replace letters in a file
 Remove all occurences of "C"
 Reverse input
 Sort users and home dir in etc/passwd
+command that finds all empty files and directories in the current directory and all sub-directories.

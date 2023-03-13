@@ -7,3 +7,4 @@ Display contents of two files
 Display last 10 lines fo /etc/passwd
 Display FIRSt 10 lines of /etc/passwd
 Third line of file iacta
+Created a file

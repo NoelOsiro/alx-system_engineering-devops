@@ -12,3 +12,4 @@ Duplicate  last line of a file
 Delete all .js files in folder and subfolders
 Unique set
 Find root word in /etc/passwd
+Count "bin" word in etc/passwd

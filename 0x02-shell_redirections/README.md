@@ -15,3 +15,4 @@
 ## Count "bin" word in etc/passwd
 ## Displays line containing root and 3 lines after that
 Hide word "bin" from /etc/passwd
+Replace letters in a file

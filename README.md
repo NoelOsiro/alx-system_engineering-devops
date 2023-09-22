@@ -38,6 +38,4 @@ contained follows:
 
 ## Author :black_nib:
 
-* __Noel Osiro__ <[noelosiro](https://github.com/NoelOsiro)>
-
-
+* __Noel Osiro__ <[noelosiro](https://github.com/NoelOsiro

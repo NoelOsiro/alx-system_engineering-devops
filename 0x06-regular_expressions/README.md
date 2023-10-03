@@ -1,11 +1,6 @@
 0x06. Regular expression
 ========================
 
--   By Sylvain Kalache
--   Weight: 1
--   Ongoing second chance project - started 01-18-2022, must end by 01-22-2022 (in 3 days) - you're done with 0% of tasks.
--   QA review fully automated.
-
 #### In a nutshell...
 
 -   **Auto QA review:** 1.0/24 mandatory & 0.0/9 optional
@@ -29,15 +24,15 @@ For this project, you have to build your regular expression using Oniguruma, a r
 Because the focus of this exercise is to play with regular expressions (regex), here is the Ruby code that you should use, just replace the regexp part, meaning the code in between the `//`:
 
 ```
-sylvain@ubuntu$ cat example.rb
+ski@ubuntu$ cat example.rb
 #!/usr/bin/env ruby
 puts ARGV[0].scan(/127.0.0.[0-9]/).join
-sylvain@ubuntu$
-sylvain@ubuntu$ ./example.rb 127.0.0.2
+ski@ubuntu$
+ski@ubuntu$ ./example.rb 127.0.0.2
 127.0.0.2
-sylvain@ubuntu$ ./example.rb 127.0.0.1
+ski@ubuntu$ ./example.rb 127.0.0.1
 127.0.0.1
-sylvain@ubuntu$ ./example.rb 127.0.0.a
+ski@ubuntu$ ./example.rb 127.0.0.a
 
 ```
 
@@ -89,13 +84,13 @@ Requirements:
 Example:
 
 ```
-sylvain@ubuntu$ ./0-simply_match_holberton.rb School | cat -e
+ski@ubuntu$ ./0-simply_match_holberton.rb School | cat -e
 School$
-sylvain@ubuntu$ ./0-simply_match_holberton.rb "Best School" | cat -e
+ski@ubuntu$ ./0-simply_match_holberton.rb "Best School" | cat -e
 School$
-sylvain@ubuntu$ ./0-simply_match_holberton.rb "School Best School" | cat -e
+ski@ubuntu$ ./0-simply_match_holberton.rb "School Best School" | cat -e
 SchoolSchool$
-sylvain@ubuntu$ ./0-simply_match_holberton.rb "Grace Hopper" | cat -e
+ski@ubuntu$ ./0-simply_match_holberton.rb "Grace Hopper" | cat -e
 $
 
 ```
@@ -207,15 +202,15 @@ Requirements:
 Example:
 
 ```
-sylvain@ubuntu$ ./5-beginning_and_end.rb 'hn' | cat -e
+ski@ubuntu$ ./5-beginning_and_end.rb 'hn' | cat -e
 $
-sylvain@ubuntu$ ./5-beginning_and_end.rb 'hbn' | cat -e
+ski@ubuntu$ ./5-beginning_and_end.rb 'hbn' | cat -e
 hbn$
-sylvain@ubuntu$ ./5-beginning_and_end.rb 'hbtn' | cat -e
+ski@ubuntu$ ./5-beginning_and_end.rb 'hbtn' | cat -e
 $
-sylvain@ubuntu$ ./5-beginning_and_end.rb 'h8n' | cat -e
+ski@ubuntu$ ./5-beginning_and_end.rb 'h8n' | cat -e
 h8n$
-sylvain@ubuntu$
+ski@ubuntu$
 $
 
 ```
@@ -243,15 +238,15 @@ Requirement:
 Example:
 
 ```
-sylvain@ubuntu$ ./6-phone_number.rb 4155049898 | cat -e
+ski@ubuntu$ ./6-phone_number.rb 4155049898 | cat -e
 4155049898$
-sylvain@ubuntu$ ./6-phone_number.rb " 4155049898" | cat -e
+ski@ubuntu$ ./6-phone_number.rb " 4155049898" | cat -e
 $
-sylvain@ubuntu$ ./6-phone_number.rb "415 504 9898" | cat -e
+ski@ubuntu$ ./6-phone_number.rb "415 504 9898" | cat -e
 $
-sylvain@ubuntu$ ./6-phone_number.rb "415-504-9898" | cat -e
+ski@ubuntu$ ./6-phone_number.rb "415-504-9898" | cat -e
 $
-sylvain@ubuntu$
+ski@ubuntu$
 
 ```
 
@@ -278,13 +273,13 @@ Requirement:
 Example:
 
 ```
-sylvain@ubuntu$ ./7-OMG_WHY_ARE_YOU_SHOUTING.rb "I realLy hOpe VancouvEr posseSs Yummy Soft vAnilla Dupper Mint Ice Nutella cream" | cat -e
+ski@ubuntu$ ./7-OMG_WHY_ARE_YOU_SHOUTING.rb "I realLy hOpe VancouvEr posseSs Yummy Soft vAnilla Dupper Mint Ice Nutella cream" | cat -e
 ILOVESYSADMIN$
-sylvain@ubuntu$ ./7-OMG_WHY_ARE_YOU_SHOUTING.rb "WHAT do you SAY?" | cat -e
+ski@ubuntu$ ./7-OMG_WHY_ARE_YOU_SHOUTING.rb "WHAT do you SAY?" | cat -e
 WHATSAY$
-sylvain@ubuntu$ ./7-OMG_WHY_ARE_YOU_SHOUTING.rb "cannot read you" | cat -e
+ski@ubuntu$ ./7-OMG_WHY_ARE_YOU_SHOUTING.rb "cannot read you" | cat -e
 $
-sylvain@ubuntu$
+ski@ubuntu$
 
 ```
 

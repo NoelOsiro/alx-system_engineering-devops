@@ -1,3 +1,4 @@
+#!/usr/bin/pup
 # Kills a process named killmenow
 
 exec { 'pkill -f killmenow':

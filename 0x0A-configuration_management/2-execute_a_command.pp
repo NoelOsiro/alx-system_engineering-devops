@@ -1,8 +1,5 @@
-# Filename: kill_process.pp
+# Kills a process named killmenow
 
-exec { 'killmenow_process':
-  command     => '/usr/bin/pkill killmenow',
-  path        => '/usr/bin',
-  refreshonly => true,
-  onlyif      => '/usr/bin/pgrep killmenow',
+exec { 'pkill -f killmenow':
+  path => '/usr/bin/:/usr/local/bin/:/bin/'
 }

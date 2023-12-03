@@ -34,7 +34,7 @@ server {
     }
 
     location /redirect_me {
-        return 301 http://example.com/;
+        return 301 https://github.com/NoelOsiro;
     }
 }
 ',

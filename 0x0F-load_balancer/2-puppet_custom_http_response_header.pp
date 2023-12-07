@@ -1,11 +1,9 @@
 # Puppet manifest to configure custom HTTP header in Nginx
 
-# Install Nginx
 class { 'nginx':
   ensure => 'installed',
 }
 
-# Create directories and files
 file { '/etc/nginx/html':
   ensure => 'directory',
 }

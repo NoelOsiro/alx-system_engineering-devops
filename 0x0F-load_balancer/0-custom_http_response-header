@@ -11,17 +11,14 @@
 apt-get update
 apt-get install -y nginx
 
-mkdir -p /var/www/html
-touch /var/www/html/index.html
-echo "Best School" > /var/www/html/index.html
-touch /var/www/html/404.html
-echo "Ceci n'est pas une page" > /var/www/html/404.html
+mkdir -p /etc/nginx/html
+echo "Best School" > /etc/nginx/html/index.html
+echo "Ceci n'est pas une page" > /etc/nginx/html/404.html
 
-printf "%s" "server {
-    listen 80 default_server;
+printf %s "server {
+    listen 80;
     listen [::]:80 default_server;
-    add_header X-Served-By $HOSTNAME;
-    root   /var/www/html;
+    root   /etc/nginx/html;
     index  index.html index.htm;
 
     location /redirect_me {
@@ -30,9 +27,10 @@ printf "%s" "server {
 
     error_page 404 /404.html;
     location /404 {
-      root /var/www/html;
-      internal;
+        root /etc/nginx/html;
+        internal;
     }
+    add_header X-Served-By \$HOSTNAME;
 }" > /etc/nginx/sites-available/default
 
 service nginx restart

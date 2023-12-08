@@ -27,7 +27,7 @@ for sub in "${subdomains[@]}"; do
 
     if [ -n "$dig_output" ]; then
         destination=$dig_output
-        record_type=$(echo "$dig_output" | grep -q '\.' && echo "CNAME" || echo "A")
+        record_type=$(echo "A")
         display_info $sub $record_type $destination
     else
         echo "No record found for $sub.$domain"
@@ -40,7 +40,7 @@ if [ -n "$subdomain" ]; then
 
     if [ -n "$dig_output" ]; then
         destination=$dig_output
-        record_type=$(echo "$dig_output" | grep -q '\.' && echo "CNAME" || echo "A")
+        record_type=$(echo "A")
         display_info $subdomain $record_type $destination
     else
         echo "No record found for $subdomain.$domain"

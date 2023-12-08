@@ -1,48 +1,35 @@
 #!/usr/bin/env bash
-# Function to display subdomain information
+# Usage: ./1-world_wide_web <domain> <subdomain>
+# Display information about subdomains.
 
-display_info() {
-    local subdomain=$1
-    local record_type=$2
-    local destination=$3
+domain_information () {
+    local subdomain="$2"
+    local domain="$1"
 
-    echo "The subdomain $subdomain is a $record_type record and points to $destination"
+    local dig_output
+    dig_output=$(dig "$subdomain.$domain" +short | grep -A1 'ANSWER SECTION:')
+
+    if [ -n "$dig_output" ]; then
+        local record_type
+        record_type=$(echo "$dig_output" | awk 'NR==1{if (/\./) print "CNAME"; else print "A"}')
+
+        local destination
+        destination=$(echo "$dig_output" | awk 'NR==2{print}')
+
+        echo "The subdomain $subdomain is a $record_type record and points to $destination"
+    else
+        echo "No information found for subdomain $subdomain"
+    fi
 }
 
-# Check if the required arguments are provided
-if [ "$#" -lt 1 ]; then
+if [ "$#" -eq 1 ]; then
+    subdomains=("www" "lb-01" "web-01" "web-02")
+    for sub in "${subdomains[@]}"; do
+        domain_information "$1" "$sub"
+    done
+elif [ "$#" -eq 2 ]; then
+    domain_information "$1" "$2"
+else
     echo "Usage: $0 <domain> [subdomain]"
     exit 1
-fi
-
-domain=$1
-subdomain=$2
-
-# Define subdomains and their corresponding IP addresses
-subdomains=("www" "lb_01" "web_01" "web_02")
-
-# Loop through subdomains and display information
-for sub in "${subdomains[@]}"; do
-    dig_output=$(dig +short $sub.$domain)
-
-    if [ -n "$dig_output" ]; then
-        destination=$dig_output
-        record_type=$(echo "A")
-        display_info $sub $record_type $destination
-    else
-        echo "No record found for $sub.$domain"
-    fi
-done
-
-# Display information for the specified subdomain if provided
-if [ -n "$subdomain" ]; then
-    dig_output=$(dig +short $subdomain.$domain)
-
-    if [ -n "$dig_output" ]; then
-        destination=$dig_output
-        record_type=$(echo "A")
-        display_info $subdomain $record_type $destination
-    else
-        echo "No record found for $subdomain.$domain"
-    fi
 fi

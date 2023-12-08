@@ -19,7 +19,7 @@ domain=$1
 subdomain=$2
 
 # Define subdomains and their corresponding IP addresses
-subdomains=("www" "lb-01" "web-01" "web-02")
+subdomains=("www" "lb_01" "web_01" "web_02")
 
 # Loop through subdomains and display information
 for sub in "${subdomains[@]}"; do

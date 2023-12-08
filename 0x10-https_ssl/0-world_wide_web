@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # Configure my domain zone:
 
-subdomains_all=( "www" "lb-01" "web-01" "web-02" )
+subdomains_all=( "www" "lb_01" "web_01" "web_02" )
 
 runDig () {
     subdomain=$1

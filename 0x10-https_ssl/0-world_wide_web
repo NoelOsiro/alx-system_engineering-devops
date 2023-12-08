@@ -2,13 +2,13 @@
 # Usage: ./1-world_wide_web <domain> <subdomain>
 # Display information about subdomains.
 
-domain_info() {
+domain_information() {
     local result=$(dig "$2"."$1" +short)
 
     if [ -z "$result" ]; then
         echo "No information found for $2.$1"
     else
-        local record_type=$(echo "$result" | awk '{if (/\./) print "CNAME"; else print "A"}')
+        local record_type=$(echo "$result" | awk 'NR==1{if (/\./) print "CNAME"; else print "A"}')
         local destination=$(echo "$result" | awk 'NR==1{print}')
         echo "The subdomain $2 is a $record_type record and points to $destination"
     fi
@@ -17,10 +17,10 @@ domain_info() {
 if [ "$#" == 1 ]; then
     subdomains=("www" "lb-01" "web-01" "web-02")
     for sub in "${subdomains[@]}"; do
-        domain_info "$1" "$sub"
+        domain_information "$1" "$sub"
     done
 elif [ "$#" == 2 ]; then
-    domain_info "$1" "$2"
+    domain_information "$1" "$2"
 else
     echo "Usage: $0 <domain> [subdomain]"
     exit 1

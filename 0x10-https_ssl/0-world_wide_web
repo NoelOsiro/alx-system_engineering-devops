@@ -1,23 +1,43 @@
 #!/usr/bin/env bash
-# Configure my domain zone:
+# Function to display subdomain information
 
-subdomains_all=( "www" "lb_01" "web_01" "web_02" )
+display_info() {
+    local subdomain=$1
+    local record_type=$2
+    local destination=$3
 
-runDig () {
-    subdomain=$1
-    domain=$2
-
-    dig "$subdomain.$domain" | grep -A1 'ANSWER SECTION:' | tail -1 | awk -v s="$subdomain" 'BEGIN { FS = " " } ; { print "The subdomain " s " is a " $4 " record and points to " $5 }'
+    echo "The subdomain $subdomain is a $record_type record and points to $destination"
 }
 
-if [ $# -eq 1 ]; then
-    domain="$1"
-    for i in "${subdomains_all[@]}"
-    do
-	runDig "$i" "$domain"
-    done
-elif [ $# -eq 2 ]; then
-    domain="$1"
-    subdomain="$2"
-    runDig "$subdomain" "$domain"
+# Check if the required arguments are provided
+if [ "$#" -lt 1 ]; then
+    echo "Usage: $0 <domain> [subdomain]"
+    exit 1
+fi
+
+domain=$1
+subdomain=$2
+
+# Define subdomains and their corresponding IP addresses
+subdomains=("www" "lb_01" "web_01" "web_02")
+lb_ip="18.215.160.204"
+web_01_ip="34.239.248.241"
+web_02_ip="100.26.11.219"
+
+# Loop through subdomains and display information
+for sub in "${subdomains[@]}"; do
+    dig_output=$(dig $sub.$domain +short)
+    destination=$(echo "$dig_output" | awk 'NR==1{print}')
+    record_type=$(echo "$dig_output" | awk 'NR==1{if (/\./) print "CNAME"; else print "A"}')
+
+    display_info $sub $record_type $destination
+done
+
+# Display information for the specified subdomain if provided
+if [ -n "$subdomain" ]; then
+    dig_output=$(dig $subdomain.$domain +short)
+    destination=$(echo "$dig_output" | awk 'NR==1{print}')
+    record_type=$(echo "$dig_output" | awk 'NR==1{if (/\./) print "CNAME"; else print "A"}')
+
+    display_info $subdomain $record_type $destination
 fi

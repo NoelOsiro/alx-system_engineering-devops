@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # Function to display subdomain information
-
+# Function to display subdomain information
 display_info() {
     local subdomain=$1
     local record_type=$2
@@ -19,25 +19,30 @@ domain=$1
 subdomain=$2
 
 # Define subdomains and their corresponding IP addresses
-subdomains=("www" "lb_01" "web_01" "web_02")
-lb_ip="18.215.160.204"
-web_01_ip="34.239.248.241"
-web_02_ip="100.26.11.219"
+subdomains=("www" "lb-01" "web-01" "web-02")
 
 # Loop through subdomains and display information
 for sub in "${subdomains[@]}"; do
-    dig_output=$(dig $sub.$domain +short)
-    destination=$(echo "$dig_output" | awk 'NR==1{print}')
-    record_type=$(echo "$dig_output" | awk 'NR==1{if (/\./) print "CNAME"; else print "A"}')
+    dig_output=$(dig +short $sub.$domain)
 
-    display_info $sub $record_type $destination
+    if [ -n "$dig_output" ]; then
+        destination=$dig_output
+        record_type=$(echo "$dig_output" | grep -q '\.' && echo "CNAME" || echo "A")
+        display_info $sub $record_type $destination
+    else
+        echo "No record found for $sub.$domain"
+    fi
 done
 
 # Display information for the specified subdomain if provided
 if [ -n "$subdomain" ]; then
-    dig_output=$(dig $subdomain.$domain +short)
-    destination=$(echo "$dig_output" | awk 'NR==1{print}')
-    record_type=$(echo "$dig_output" | awk 'NR==1{if (/\./) print "CNAME"; else print "A"}')
+    dig_output=$(dig +short $subdomain.$domain)
 
-    display_info $subdomain $record_type $destination
+    if [ -n "$dig_output" ]; then
+        destination=$dig_output
+        record_type=$(echo "$dig_output" | grep -q '\.' && echo "CNAME" || echo "A")
+        display_info $subdomain $record_type $destination
+    else
+        echo "No record found for $subdomain.$domain"
+    fi
 fi

@@ -5,6 +5,9 @@
 import requests
 
 def number_of_subscribers(subreddit):
+    """
+    Get no fo subscribers to a topic
+    """
     api_url = f"https://www.reddit.com/r/{subreddit}/about.json"
     headers = {'User-Agent': 'CustomBot/1.0'}
     response = requests.get(api_url, headers=headers)

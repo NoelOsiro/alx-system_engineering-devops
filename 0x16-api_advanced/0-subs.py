@@ -10,8 +10,8 @@ def number_of_subscribers(subreddit):
     Get no fo subscribers to a topic
     """
     api_url = f"https://www.reddit.com/r/{subreddit}/about.json"
-    headers = {'User-Agent': 'CustomBot/1.0'}
-    response = requests.get(api_url, headers=headers)
+    headers = {'User-Agent': "linux:0x16.api.advanced:v1.0.0 (by NoelOsiro)"}
+    response = requests.get(api_url, headers=headers, allow_redirects=False)
     if response.status_code == 200:
         data = response.json()
         if 'data' in data and 'subscribers' in data['data']:

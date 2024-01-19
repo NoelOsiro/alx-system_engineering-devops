@@ -1,17 +1,6 @@
-# 0-strace_is_your_friend.pp
+# Fixes bad `phpp` extensions to `php` in the WordPress file `wp-settings.php`.
 
-# Example Puppet code (modify as per your findings)
-file { '/etc/apache2/httpd.conf':
-  ensure  => file,
-  source  => 'puppet:///modules/my_module/httpd.conf', # Provide the correct path or content
-  mode    => '0644',
-  owner   => 'root',
-  group   => 'root',
-  notify  => Service['apache2'],
-}
-
-service { 'apache2':
-  ensure  => running,
-  enable  => true,
-  require => File['/etc/apache2/httpd.conf'],
+exec { 'fix-wordpress':
+  command => 'sed -i s/phpp/php/g /var/www/html/wp-settings.php',
+  path    => '/usr/local/bin/:/bin/'
 }

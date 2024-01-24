@@ -1,41 +1,48 @@
-# System Engineering and DevOps - Bash, Scripting, Web Stack/Web Stack Debugging, Networking & Security, CI/CD
+# Application server
 
-This repository contains programs written for the system engineering and DevOps
-track at ALX Africa. In these projects, I worked with Bash and practiced
-writing Bash scripts to automate tasks. I learned about the OSI model and
-various Linux networking tools. Further, I configured a distributed system -
-two web servers and one load balancer - for deployment of my side projects. The specific list of projects
-contained follows:
+This was the application deployment project for our AirBnB clone. In this
+project, I configured Nginx on the web servers provided me by Holberton School
+to serve a WSGI Flask app running through Gunicorn. Additionally, I set up an
+Upstart script to keep the application running on server reboots.
 
-* [0x00. Shell, basics](./0x00-shell_basics)
-* [0x01. Shell, permissions](./0x01-shell_permissions)
-* [0x02. Shell, I/O Redirections and filters](./0x02-shell_redirections)
-* [0x03. Shell, init files, variables and expansions](./0x03-shell_variables_expansions)
-* [0x04. Loops, conditions and parsing](./0x04-loops_conditions_and_parsing)
-* [0x05. Processes and signals](./0x05-processes_and_signals)
-* [0x06. Regular expression](./0x06-regular_expressions)
-* [0x07. Networking basics #0](./0x07-networking_basics)
-* [0x08. Networking basics #1](./0x08-networking_basics_2)
-* [0x09. Web infrastructure design](./0x09-web_infrastructure_design)
-* [0x0A. SSH](./0x0A-ssh)
-* [0x0B. Web server](./0x0B-web_server)
-* [0x0C. Web stack debugging #0](./0x0C-web_stack_debugging_0)
-* [0x0D. Configuration management](./0x0D-configuration_management)
-* [0x0E. Web stack debugging #1](./0x0E-web_stack_debugging_1)
-* [0x10. HTTPS SSL](./0x10-https_ssl)
-* [0x11. What happens when you type holbertonschool.com in your browser and press Enter](./0x11-what_happens_when_your_type_holbertonschool_com_in_your_browser_and_press_enter)
-* [0x12. Web stack debugging #2](./0x12-web_stack_debugging_2)
-* [0x13. Firewall](./0x13-firewall)
-* [0x14. Mysql](./0x14-mysql)
-* [0x15. API](./0x15-api)
-* [0x16. API advanced](./0x16-api_advanced)
-* [0x17. Web stack debugging #3](./0x17-web_stack_debugging_3)
-* [0x18. Webstack monitoring](./0x18-webstack_monitoring)
-* [0x19. Postmortem](./0x19-postmortem)
-* [0x1A. Application server](./0x1A-application_server)
-* [0x1B. Web stack debugging #4](./0x1B-web_stack_debugging_4)
-* [Command Line for the Win](./command_line_for_the_win)
+## Tasks :page_with_curl:
 
-## Author :black_nib:
+* **0. Set up development with Python**
+  * In this task, I configured the file `web_flask/0-hello_route.py` from my
+  [AirBnB_clone_v2](https://github.com/bdbaraban/AirBnB_clone_v2) to serve content
+  on the route `/airbnb-onepage/`, running on port `5000`.
 
-* __Noel Osiro__ <[noelosiro](https://github.com/NoelOsiro
+* **1. Set up production with Gunicorn**
+  * This task involved setting up a production environment, installing and configuring
+  Gunicorn to serve the same file from task 0.
+
+* **2. Serve a page with Nginx**
+  * [2-app_server-nginx_config](./2-app_server-nginx_config): Nginx configuration file
+  proxying requests on the route `/airbnb-onepage/` to the Gunicorn app running on
+  port `5000`.
+
+* **3. Add a route with query parameters**
+  * [3-app_server-nginx_config](./3-app_server-nginx_config): Nginx configuration file
+  proxying requests on the route `/airbnb-dynamic/number_odd_or_even/<int: num>` to the
+  Gunicorn app running on port `5000`.
+
+* **4. Let's do this for your API**
+  * In this task, I configured the API from my [AirBnB_clone_v3](./https://github.com/Ostoyae/AirBnB_clone_v3) to run on Gunicorn.
+  * [4-app_server-nginx_config](./4-app_server-nginx_config): Nginx configuration file
+  that proxies requests on the AirBnB API to the corresponding Gunicorn app.
+
+* **5. Serve your AirBnB clone**
+  * In this task, I configured the complete AirBnB app from [AirBnB_clone_v4](https://github.com/bdbaraban/AirBnB_clone_v4) to run on Gunicorn and be served through Nginx.
+  * [5-app_server-nginx_config](./5-app_server-nginx_config): Nginx configuration file
+  configured to serve the static assets from `web_dynamic/static/` on the Gunicorn AirBnB
+  app.
+
+* **6. Deploy it**
+  * [gunicorn.conf](./gunicorn.conf): Configuration file for an Upstart script that starts a
+  Gunicorn process bounded to port 5003 that serves the content from task 5.
+  * The Gunicorn process spawns three worker processes and logs errors to `/tmp/airbnb-error.log`,
+  access to `/tmp/airbnb-access.log`.
+
+* **7. No service interruption**
+  * [4-reload_gunicorn_no_downtime](./4-reload_gunicorn_no_downtime): Bash script that gracefully
+  reloads Gunicorn.

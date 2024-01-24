@@ -1,15 +1,15 @@
 # Application server
 
 This was the application deployment project for our AirBnB clone. In this
-project, I configured Nginx on the web servers provided me by Holberton School
-to serve a WSGI Flask app running through Gunicorn. Additionally, I set up an
+project, I configured Nginx on the web servers provided  to serve a WSGI 
+Flask app running through Gunicorn. Additionally, I set up an
 Upstart script to keep the application running on server reboots.
 
 ## Tasks :page_with_curl:
 
 * **0. Set up development with Python**
   * In this task, I configured the file `web_flask/0-hello_route.py` from my
-  [AirBnB_clone_v2](https://github.com/bdbaraban/AirBnB_clone_v2) to serve content
+  [AirBnB_clone_v2](https://github.com/NoelOsiro/AirBnB_clone_v2) to serve content
   on the route `/airbnb-onepage/`, running on port `5000`.
 
 * **1. Set up production with Gunicorn**
@@ -32,7 +32,7 @@ Upstart script to keep the application running on server reboots.
   that proxies requests on the AirBnB API to the corresponding Gunicorn app.
 
 * **5. Serve your AirBnB clone**
-  * In this task, I configured the complete AirBnB app from [AirBnB_clone_v4](https://github.com/bdbaraban/AirBnB_clone_v4) to run on Gunicorn and be served through Nginx.
+  * In this task, I configured the complete AirBnB app from [AirBnB_clone_v4](https://github.com/NoelOsiro/AirBnB_clone_v4) to run on Gunicorn and be served through Nginx.
   * [5-app_server-nginx_config](./5-app_server-nginx_config): Nginx configuration file
   configured to serve the static assets from `web_dynamic/static/` on the Gunicorn AirBnB
   app.

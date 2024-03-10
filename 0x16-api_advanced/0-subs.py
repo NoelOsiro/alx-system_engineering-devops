@@ -8,8 +8,17 @@ import base64
 import requests
 
 
-
 def number_of_subscribers(subreddit):
+    """
+    Queries the Reddit API and returns the number of subs for a subreddit.
+
+    Args:
+        subreddit (str): The name of the subreddit.
+
+    Returns:
+        int: The number of subss for the subreddit. If invalid,
+             it returns 0.
+    """
     # Reddit API endpoint for subreddit information
     url = f"https://www.reddit.com/r/{subreddit}/about.json"
     headers = {

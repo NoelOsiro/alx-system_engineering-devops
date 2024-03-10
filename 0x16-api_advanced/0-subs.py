@@ -14,13 +14,15 @@ def number_of_subscribers(subreddit):
     Function that queries the Reddit API
     - If not a valid subreddit, return 0.
     """
-    url = f"https://www.reddit.com/r/{subreddit}/about.json"
-    headers = {
-        'User-Agent': 'alx-pass/1.0',
-        'Authorization': f'Basic {base64.b64encode(
-            b"Rb1PJ7q615K2oGNI871S4w:jaUSqXlK0P4nFdEGleLCoe9SpgrF2w")
-            .decode("utf-8")}'
-    }
+    req = requests.get(
+        "https://www.reddit.com/r/{}/about.json".format(subreddit),
+        headers={
+            'User-Agent': 'alx-pass/1.0',
+            'Authorization': f'Basic {base64.b64encode(
+                b"Rb1PJ7q615K2oGNI871S4w:jaUSqXlK0P4nFdEGleLCoe9SpgrF2w")
+                .decode("utf-8")}'},
+    )
+
     if req.status_code == 200:
         return req.json().get("data").get("subscribers")
     else:

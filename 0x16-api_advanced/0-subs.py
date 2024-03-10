@@ -1,9 +1,16 @@
 #!/usr/bin/python3
 """
-Function that queries the Reddit API and returns the number of subscribers
-(not active users, total subscribers) for a given subreddit.
-If an invalid subreddit is given, the function should return 0
+Reddit Subreddit Subscriber Count Module
+
+This module provides a function for querying the Reddit API and retrieving the
+number of subs (total subs) for a specified subreddit.
+
+Functions:
+    - number_of_subs(subreddit): Queries the Reddit API and returns the
+      number of subs for the given subreddit. If the subreddit is invalid,
+      it returns 0.
 """
+
 import base64
 import requests
 
@@ -16,11 +23,12 @@ def number_of_subscribers(subreddit):
         subreddit (str): The name of the subreddit.
 
     Returns:
-        int: The number of subss for the subreddit. If invalid,
+        int: The number of subs for the subreddit. If the subreddit is invalid,
              it returns 0.
     """
     # Reddit API endpoint for subreddit information
     url = f"https://www.reddit.com/r/{subreddit}/about.json"
+    # Set the User-Agent and Authorization headers
     headers = {
         'User-Agent': 'alx-pass/1.0',
         'Authorization': f'Basic {base64.b64encode(
@@ -42,8 +50,8 @@ def number_of_subscribers(subreddit):
             # Check if the subreddit is invalid (status code 404)
             elif response.status_code == 404:
                 return 0
+            # Handle other errors
             else:
                 return 0
-        # Handle potential exceptions (e.g., network issues)
         except Exception as e:
             return 0

@@ -23,6 +23,7 @@ Host *
 #   RhostsRSAAuthentication no
 #   RSAAuthentication yes
     PasswordAuthentication no
+    PreferredAuthentications publickey
 #   HostbasedAuthentication no
 #   GSSAPIAuthentication no
 #   GSSAPIDelegateCredentials no

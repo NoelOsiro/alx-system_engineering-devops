@@ -14,16 +14,22 @@ def number_of_subscribers(subreddit):
     Function that queries the Reddit API
     - If not a valid subreddit, return 0.
     """
-    req = requests.get(
-        "https://www.reddit.com/r/{}/about.json".format(subreddit),
-        headers={
-            'User-Agent': 'alx-pass/1.0',
-            'Authorization': f'Basic {base64.b64encode(
-                b"Rb1PJ7q615K2oGNI871S4w:jaUSqXlK0P4nFdEGleLCoe9SpgrF2w")
-                .decode("utf-8")}'},
-    )
-
-    if req.status_code == 200:
-        return req.json().get("data").get("subscribers")
-    else:
+    code = "Rb1PJ7q615K2oGNI871S4w:jaUSqXlK0P4nFdEGleLCoe9SpgrF2w"
+    try:
+        auth_header_value = base64.b64encode(
+            code.encode("utf-8")).decode("utf-8")
+        req = requests.get(
+            "https://www.reddit.com/r/{}/about.json".format(subreddit),
+            headers={
+                'User-Agent': 'alx-pass/1.0',
+                'Authorization': f'Basic {auth_header_value}'
+            }
+        )
+        req.raise_for_status()
+        if req.status_code == 200:
+            return req.json().get("data").get("subscribers")
+        else:
+            return 0
+    except requests.RequestException as e:
+        print(f"An error occurred: {e}")
         return 0

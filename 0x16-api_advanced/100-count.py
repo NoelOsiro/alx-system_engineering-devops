@@ -1,5 +1,6 @@
 #!/usr/bin/python3
 """Function to count words in all hot posts of a given Reddit subreddit."""
+import base64
 import requests
 
 
@@ -13,11 +14,14 @@ def count_words(subreddit, word_list, instances={}, after="", count=0):
         after (str): The parameter for the next page of the API results.
         count (int): The parameter of results matched thus far.
     """
+    code = "Rb1PJ7q615K2oGNI871S4w:jaUSqXlK0P4nFdEGleLCoe9SpgrF2w"
+    auth_header_value = base64.b64encode(
+            code.encode("utf-8")).decode("utf-8")
     url = "https://www.reddit.com/r/{}/hot/.json".format(subreddit)
     headers = {
-        'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_2) Apple' +
-        'WebKit/537.36 (KHTML, like Gecko) Chrome/76.0.3809.132 Safari/537.36'
-    }
+        'User-Agent': 'alx-pass/1.0',
+        'Authorization': f'Basic {auth_header_value}'
+        }
     params = {
         "after": after,
         "count": count,
